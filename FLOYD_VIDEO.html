@@ -11,35 +11,25 @@
             height: 100%;
             overflow: hidden;
         }
-        video {
+        iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
     </style>
 </head>
 <body>
-    <video autoplay loop muted id="video">
-        <source src="https://www.youtube.com/watch?v=7o_QghsyLR0" type="video/mp4">
-        Dein Browser unterstützt das Video-Tag nicht.
-    </video>
+    <!-- YouTube-Video im iframe -->
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/7o_QghsyLR0?autoplay=1&loop=1&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
     <script>
-        var video = document.getElementById("video");
-        video.oncanplaythrough = function() {
-            // Vollbildmodus aktivieren, wenn das Video bereit zum Abspielen ist
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) { // Firefox
-                video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) { // Chrome, Safari
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) { // IE/Edge
-                video.msRequestFullscreen();
-            }
+        // Optional: Du kannst den Vollbildmodus auch per Klick aktivieren.
+        var iframe = document.querySelector("iframe");
+        iframe.onclick = function() {
+            var player = iframe.contentWindow;
+            player.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); // Video starten
         };
     </script>
 </body>
