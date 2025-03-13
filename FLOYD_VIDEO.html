@@ -22,14 +22,21 @@
 </head>
 <body>
     <!-- YouTube-Video im iframe -->
-    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/7o_QghsyLR0?autoplay=1&loop=1&mute=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <iframe width="100%" height="100%" 
+            src="https://www.youtube.com/embed/7o_QghsyLR0?autoplay=1&loop=1&mute=1&playlist=7o_QghsyLR0" 
+            frameborder="0" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen>
+    </iframe>
 
     <script>
-        // Optional: Du kannst den Vollbildmodus auch per Klick aktivieren.
+        // Optional: Wenn du den Vollbildmodus explizit aktivieren möchtest, kannst du das mit der YouTube Player API tun.
         var iframe = document.querySelector("iframe");
         iframe.onclick = function() {
+            // Wenn der User auf das Video klickt, wird der Vollbildmodus aktiviert.
             var player = iframe.contentWindow;
-            player.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); // Video starten
+            player.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); // Video starten (falls nicht automatisch)
+            player.postMessage('{"event":"command","func":"fullscreen","args":""}', '*'); // Vollbild aktivieren
         };
     </script>
 </body>
